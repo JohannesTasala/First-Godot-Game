@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bss4kp0nmaivi"]
+
+[ext_resource type="Texture2D" uid="uid://doqii3kn1cnm" path="res://Assets/Characters/miniReaper (4).png" id="1_0njpd"]
+[ext_resource type="Script" path="res://Reaper.gd" id="1_lnuhb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk4i2"]
+atlas = ExtResource("1_0njpd")
+region = Rect2(0, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nybkf"]
+atlas = ExtResource("1_0njpd")
+region = Rect2(0, 640, 640, 640)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_06jpg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk4i2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nybkf")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2nypx"]
+radius = 13.3416
+height = 55.3144
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k1i5b"]
+radius = 253.002
+
+[node name="Reaper" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_lnuhb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -32)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_06jpg")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.684899
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -27)
+rotation = 0.292421
+shape = SubResource("CapsuleShape2D_2nypx")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(0, -27)
+shape = SubResource("CircleShape2D_k1i5b")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

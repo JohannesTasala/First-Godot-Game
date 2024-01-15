@@ -1,0 +1,257 @@
+[gd_scene load_steps=26 format=3 uid="uid://kksbwghc5a5d"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_5o5c6"]
+[ext_resource type="Texture2D" uid="uid://bueevx5ltfwjm" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/spritesheets/player.png" id="1_m3qiy"]
+[ext_resource type="Texture2D" uid="uid://dwhn3i1fwlv8x" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/idle/player-idle-1.png" id="2_wksnv"]
+[ext_resource type="Texture2D" uid="uid://ctswft6jcxrik" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/idle/player-idle-2.png" id="3_klpgy"]
+[ext_resource type="Texture2D" uid="uid://hs60fmp6rce4" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/idle/player-idle-3.png" id="4_6prwr"]
+[ext_resource type="Texture2D" uid="uid://csj7qeavw0iya" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/idle/player-idle-4.png" id="5_i5qp0"]
+[ext_resource type="Texture2D" uid="uid://dsfcjwnecmnvw" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/jump/player-jump-1.png" id="6_hgu0d"]
+[ext_resource type="Texture2D" uid="uid://c07cl07nhpw4p" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/jump/player-jump-2.png" id="7_rymu5"]
+[ext_resource type="Texture2D" uid="uid://bxtknebtkpi4m" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-1.png" id="8_dh2kq"]
+[ext_resource type="Texture2D" uid="uid://b5s26d7idryb4" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-2.png" id="9_ekvx3"]
+[ext_resource type="Texture2D" uid="uid://cbnfibcn6ccf3" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-3.png" id="10_by25h"]
+[ext_resource type="Texture2D" uid="uid://crnts2irvoog1" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-4.png" id="11_1m4bn"]
+[ext_resource type="Texture2D" uid="uid://dkohapjmicy2" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-5.png" id="12_e1w1f"]
+[ext_resource type="Texture2D" uid="uid://bmvyic4wbbgd3" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/player/run/player-run-6.png" id="13_8hoff"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d0buu"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjf4c"]
+atlas = ExtResource("1_m3qiy")
+region = Rect2(1, 131, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b325o"]
+atlas = ExtResource("1_m3qiy")
+region = Rect2(33, 131, 32, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_44cyb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjf4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b325o")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wksnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_klpgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6prwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i5qp0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_hgu0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rymu5")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_dh2kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ekvx3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_by25h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1m4bn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e1w1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8hoff")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_rq5r5"]
+resource_name = "Death"
+
+[sub_resource type="Animation" id="Animation_p4ke1"]
+resource_name = "Fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_w8rgy"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7v31w"]
+resource_name = "Jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l3d8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7oiwf"]
+resource_name = "Run"
+length = 0.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3a75b"]
+_data = {
+"Death": SubResource("Animation_rq5r5"),
+"Fall": SubResource("Animation_p4ke1"),
+"Idle": SubResource("Animation_w8rgy"),
+"Jump": SubResource("Animation_7v31w"),
+"RESET": SubResource("Animation_l3d8b"),
+"Run": SubResource("Animation_7oiwf")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_5o5c6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 5)
+shape = SubResource("CapsuleShape2D_d0buu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_44cyb")
+animation = &"Idle"
+frame = 1
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.6, 1.6)
+limit_left = 0
+limit_top = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3a75b")
+}
+autoplay = "Idle"

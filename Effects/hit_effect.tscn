@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://20n5cd2qf63l"]
+
+[ext_resource type="Script" path="res://Effects/hit_effect.gd" id="1_7gpau"]
+[ext_resource type="Texture2D" uid="uid://b0d67v8pfmqhb" path="res://Assets/Sunny-land-files/Sunny-land-files/Graphical Assets/sprites/item-feedback/item-feedback-4.png" id="1_v5yxy"]
+
+[sub_resource type="Curve" id="Curve_lhfs1"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8nu3a"]
+curve = SubResource("Curve_lhfs1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7edxk"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_8nu3a")
+color = Color(0, 0, 0, 1)
+
+[node name="HitEffect" type="Node2D"]
+script = ExtResource("1_7gpau")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(0.5, 0.5)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_7edxk")
+texture = ExtResource("1_v5yxy")
+lifetime = 0.2
+speed_scale = 1.2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
